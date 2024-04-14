@@ -288,7 +288,7 @@
   [category = 2] {
     [zoom >= 9][zoom < 16] {
       text-name: "[name]";
-      text-size: 10;
+      text-size: 0;
       text-fill: @placenames;
       text-face-name: @book-fonts;
       text-halo-fill: @standard-halo-fill;
@@ -297,19 +297,19 @@
       text-line-spacing: -0.8; // -0.08 em
       text-margin: 7; // 0.7 em
       [zoom >= 11] {
-        text-size: 11;
+        text-size: 0;
         text-wrap-width: 55; // 5.0 em
         text-line-spacing: -0.55; // -0.05 em
         text-margin: 7.7; // 0.7 em
       }
       [zoom >= 12] {
-        text-size: 13;
+        text-size: 0;
         text-wrap-width: 65; // 5.0 em
         text-line-spacing: -0.65; // -0.05 em
         text-margin: 8.4; // 0.7 em
       }
       [zoom >= 14] {
-        text-size: 15;
+        text-size: 0;
         text-wrap-width: 75; // 5.0 em
         text-line-spacing: -0.75; // -0.05 em
         text-margin: 10.5; // 0.7 em

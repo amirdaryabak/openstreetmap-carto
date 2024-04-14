@@ -48,7 +48,7 @@
   }
 }
 
-#amenity-points[zoom >= 16] {
+#amenity-points[zoom >= 18] {
   [feature = 'golf_pin'] {
     marker-file: url('symbols/leisure/golf_pin.svg');
     marker-fill: @golf-color;

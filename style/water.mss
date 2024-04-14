@@ -22,12 +22,12 @@
   [natural = 'water'],
   [landuse = 'reservoir'],
   [waterway = 'riverbank'] {
-    [int_intermittent = 'no'] {
+    [int_intermittent = 'no'][zoom >= 7] {  /* Include this line to exclude zoom >= 7 */
       polygon-fill: @water-color;
       [way_pixels >= 4] { polygon-gamma: 0.75; }
       [way_pixels >= 64] { polygon-gamma: 0.6; }
     }
-    [int_intermittent = 'yes'] {
+    [int_intermittent = 'yes'][zoom >= 7] {  /* Include this line to exclude zoom >= 7 */
       polygon-pattern-file: url('patterns/intermittent_water.svg');
       [way_pixels >= 4] { polygon-pattern-gamma: 0.75; }
       [way_pixels >= 64] { polygon-pattern-gamma: 0.6; }
@@ -37,16 +37,16 @@
 
 #water-lines-low-zoom {
   [waterway = 'river'][zoom >= 8][zoom < 12] {
-    [int_intermittent = 'yes'] {
-      line-dasharray: 8,4;
-      line-cap: butt;
-      line-join: round;
-      line-clip: false;
-    }
-    line-color: @water-color;
-    line-width: 0.7;
-    [zoom >= 9] { line-width: 1.2; }
-    [zoom >= 10] { line-width: 1.6; }
+    /*    [int_intermittent = 'yes'] {
+          line-dasharray: 8,4;
+          line-cap: butt;
+          line-join: round;
+          line-clip: false;
+        }
+        line-color: @water-color;
+        line-width: 0.7;
+        [zoom >= 9] { line-width: 1.2; }
+        [zoom >= 10] { line-width: 1.6; }     */
   }
 }
 

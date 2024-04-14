@@ -23,8 +23,8 @@ If you are eager to get started, here is an overview over the necessary steps:
 * `git clone https://github.com/gravitystorm/openstreetmap-carto.git` to clone openstreetmap-carto repository into a directory on your host system
 * Download OpenStreetMap data in osm.pbf format to a file `data.osm.pbf` and place it within the openstreetmap-carto directory (for example some small area from [Geofabrik](https://download.geofabrik.de/))
 * If necessary, `sudo service postgresql stop` to make sure you don't have a currently-running native PostgreSQL server which would conflict with Docker's PostgreSQL server.
-* `docker-compose up import` to import the data (only necessary the first time or when you change the data file). Additionally, you can set import options through [environment variables](#Importing-data). More on that [later](#Hands-on-approach)
-* `docker-compose up kosmtik` to run the style preview application
+* `docker compose up import` to import the data (only necessary the first time or when you change the data file). Additionally, you can set import options through [environment variables](#Importing-data). More on that [later](#Hands-on-approach)
+* `docker compose up kosmtik` to run the style preview application
 * Browse to [http://127.0.0.1:6789](http://127.0.0.1:6789) to view the output of Kosmtik
 * Ctrl+C to stop the style preview application
 * `docker-compose stop db` to stop the database container
@@ -39,7 +39,7 @@ This OpenStreetMap Carto repository needs to be a directory that is shared betwe
 
 OpenStreetMap Carto needs a database populated with rendering data to work. You first need a data file to import.
 For testing purposes, it's probably easiest to grab a PBF export of OSM data from [Geofabrik](https://download.geofabrik.de
-Once you have that file put it into the openstreetmap-carto directory and run `docker-compose up import` in the openstreetmap-carto directory.
+Once you have that file put it into the openstreetmap-carto directory and run `docker compose up import` in the openstreetmap-carto directory.
 This starts the PostgreSQL container (downloads it if it not exists) and starts a container that runs [osm2pgsql](https://github.com/openstreetmap/osm2pgsql) to import the data. The container is built the first time you run that command if it not exists.
 At startup of the container the script `scripts/docker-startup.sh` is invoked which prepares the database and itself starts osm2pgsql for importing the data. Then the `scripts/get-external-data.py` is called to download and import needed shapefiles.
 
@@ -71,7 +71,7 @@ PG_WORK_MEM=128MB PG_MAINTENANCE_WORK_MEM=2GB \
 OSM2PGSQL_CACHE=2048 OSM2PGSQL_NUMPROC=4 \
 OSM2PGSQL_DATAFILE=taiwan.osm.pbf \
 EXTERNAL_DATA_SCRIPT_FLAGS="--cache --no-update" \
-docker-compose up import
+docker compose up import
 ```
 
 Note that on Linux you need to export those environment variables before calling docker-compose. If you are using sudo to call docker (because your user is not in the docker group (which we don't recommend)), you need to also use sudo -E option
@@ -82,7 +82,7 @@ Depending on your machine and the size of the extract the import can take a whil
 
 ## Test rendering
 
-After you have the necessary data available you can start Kosmtik to produce a test rendering. To do that, run `docker-compose up kosmtik` in the openstreetmap-carto directory. This starts a container with Kosmtik and also starts the PostgreSQL database container if it is not already running. The Kosmtik container is built the first time you run the command if it does not yet exist.
+After you have the necessary data available you can start Kosmtik to produce a test rendering. To do that, run `docker compose up kosmtik` in the openstreetmap-carto directory. This starts a container with Kosmtik and also starts the PostgreSQL database container if it is not already running. The Kosmtik container is built the first time you run the command if it does not yet exist.
 When the container starts, the script `scripts/docker-startup.sh` is invoked, which downloads supplemental shapefiles specified in `scripts/get-external-data.py` (if they are not already present). Afterward, it runs the Kosmtik server. If you have to customize anything, you can do so in the script. The Kosmtik config file can be found in `.kosmtik-config.yml`.
 If you want to have a [local configuration](https://github.com/kosmtik/kosmtik#local-config) for your `project.mml`, you can place a `localconfig.js` or `localconfig.json` file into the openstreetmap-carto directory.
 

@@ -5,13 +5,13 @@
 /* scripts/generate_road_colours.py > style/road-colors-generated.mss */
 /*                                                                    */
 @motorway-casing: #dc2a67;
-@trunk-casing: #c84e2f;
+@trunk-casing: #ED977E;
 @primary-casing: #a06b00;
 @secondary-casing: #707d05;
 @motorway-fill: #e892a2;
-@trunk-fill: #f9b29c;
-@primary-fill: #fcd6a4;
-@secondary-fill: #f7fabf;
+@trunk-fill: #fdd6c9;
+@primary-fill: #FFFFFF;
+@secondary-fill: #FFFFFF;
 @motorway-low-zoom: #e66e89;
 @trunk-low-zoom: #f6967a;
 @primary-low-zoom: #f4c37d;
